@@ -2,10 +2,13 @@ const express = require('express');
 const cors = require('cors'); 
 const app = express();      
 
+app.use(cors());
+app.use(express.json());
 
-
-
-app.use(cors())
+// Ruta raíz solo como prueba
+app.get('/', (req, res) => {
+  res.send('API funcionando correctamente en Vercel 🚀');
+});
 
 app.get('/alumnos', (req, res) => {
   console.log(req.query);
@@ -22,7 +25,5 @@ app.post('/directivas', (req, res) => {
   res.send('Hello World!');
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
+// ✅ Exportar app para Vercel
+module.exports = app;
